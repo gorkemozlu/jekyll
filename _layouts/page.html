@@ -28,6 +28,12 @@ layout: base
       {% include comments.html %}
     </div>
     <div class="{% if page.full-width %} col {% else %} col-xl-2 offset-xl-0 col-lg-2 offset-lg-0 {% endif %}">
+      {%- capture site_tags -%}
+          {%- for tag in site.tags -%}
+              {{- tag | first -}}{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+      {%- endcapture -%}
+      {%- assign tags_list = site_tags | split:',' | sort -%}
       <div id="full-tags-list">
         {%- for tag in tags_list -%}
             <h2 id="{{- tag -}}" class="linked-section">
